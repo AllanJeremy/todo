@@ -1,5 +1,5 @@
 export class CreateTodoDto {
-  id: string;
+  id: number;
   task: string;
   isDone: boolean;
   description?: string;
