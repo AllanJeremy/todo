@@ -10,7 +10,7 @@ export class TodoService {
 
   /** Adds a todo item and returns the added item */
   addTodo(todoItem: CreateTodoDto): CreateTodoDto {
-    todoItem.id = Math.floor(Math.random() * 10000).toString();
+    todoItem.id = Math.floor(Math.random() * 10000);
     todoItem.isDone = todoItem.isDone || false;
 
     this.todos.push(todoItem);
@@ -22,7 +22,7 @@ export class TodoService {
   }
 
   updateTodo(
-    id: string,
+    id: number,
     updateData: UpdateTodoDto,
   ): { prev: Todo; current: Todo } {
     let updateTodo: { prev: Todo; current: Todo };
@@ -41,7 +41,7 @@ export class TodoService {
     return updateTodo;
   }
 
-  removeTodo(id: string): boolean {
+  removeTodo(id: number): boolean {
     const todoIdList = this.todos.map((todo) => todo.id);
 
     if (!todoIdList.includes(id)) return false;

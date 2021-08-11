@@ -19,6 +19,7 @@ export class TodoController {
 
   @Post()
   addTodo(@Body('data') todoData: CreateTodoDto) {
+    console.log('Create todo data: ', todoData);
     return this.todoService.addTodo(todoData);
   }
 
@@ -39,7 +40,7 @@ export class TodoController {
 
   // Delete todo
   @Delete(':id')
-  removeTodo(@Param('id') id: string) {
+  removeTodo(@Param('id') id: number) {
     return this.todoService.removeTodo(id);
   }
 }
