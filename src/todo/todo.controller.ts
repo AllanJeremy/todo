@@ -11,8 +11,6 @@ import { CreateTodoDto } from './dto/createTodo.dto';
 import { UpdateTodoDto } from './dto/updateTodo.dto';
 import { TodoService } from './todo.service';
 
-import { Todo } from './entities/todo.entity';
-
 @Controller('todo')
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
@@ -25,8 +23,10 @@ export class TodoController {
 
   // Get todos
   @Get()
-  getTodos(): Todo[] {
-    return this.todoService.getTodos();
+  async getTodos() {
+    const todos = await this.todoService.getTodos();
+
+    return { data: todos };
   }
 
   // Update todo

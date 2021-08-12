@@ -1,6 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+enum Priority {
+  HIGH = 'high',
+  MEDIUM = 'medium',
+  LOW = 'low',
+}
+
+@Entity({ name: 'todos' })
 export class Todo {
   @PrimaryGeneratedColumn()
   id: number;
@@ -11,6 +17,9 @@ export class Todo {
   @Column()
   isDone: boolean;
 
-  @Column()
+  @Column('enum', { enum: Priority, default: Priority.MEDIUM })
+  priority;
+
+  @Column({ default: null })
   description?: string | null;
 }
