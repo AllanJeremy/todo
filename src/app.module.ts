@@ -4,9 +4,7 @@ import { Connection } from 'typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Todo } from './todo/entities/todo.entity';
-import { TodoController } from './todo/todo.controller';
-import { TodoService } from './todo/todo.service';
+import { TodoModule } from './todo/todo.module';
 
 @Module({
   imports: [
@@ -17,11 +15,13 @@ import { TodoService } from './todo/todo.service';
       username: 'root',
       password: '',
       database: 'test_todo',
-      entities: [Todo],
+      autoLoadEntities: true,
+      synchronize: true,
     }),
+    TodoModule,
   ],
-  controllers: [AppController, TodoController],
-  providers: [AppService, TodoService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {
   constructor(private connection: Connection) {}
