@@ -19,8 +19,12 @@ export class TodoService {
     return this.todoRepository.save(todoEntry);
   }
 
-  getTodos() {
-    return this.todoRepository.find();
+  getTodos(filter: Record<string, unknown> | null = null) {
+    return this.todoRepository.find({
+      relations: ['user'],
+
+      where: filter,
+    });
   }
 
   updateTodo(id: number, updateData: UpdateTodoDto) {

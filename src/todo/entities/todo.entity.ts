@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/user/entities/user.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 enum Priority {
   HIGH = 'high',
@@ -22,4 +23,9 @@ export class Todo {
 
   @Column({ default: null })
   description?: string | null;
+
+  @ManyToOne(() => User, (user) => user.todos, {
+    onDelete: 'CASCADE',
+  })
+  user: User;
 }

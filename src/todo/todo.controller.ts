@@ -29,6 +29,17 @@ export class TodoController {
     return { data: todos };
   }
 
+  // Get todos by user phone number
+  @Get('/:phone')
+  async getTodosByPhone(@Param('phone') phone: string) {
+    const filter = { user: { phone } };
+
+    console.log(filter);
+    const todos = await this.todoService.getTodos(filter);
+
+    return todos;
+  }
+
   // Update todo
   @Patch(':id')
   updateTodos(
